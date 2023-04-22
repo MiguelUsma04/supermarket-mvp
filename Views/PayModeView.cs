@@ -37,7 +37,7 @@ namespace Supermarket_mvp.Views
             };
         }
 
-        public string PayModeId 
+        public string PayModeId
         {
             get { return TxtPayModeId.Text; }
             set { TxtPayModeId.Text = value; }
@@ -47,27 +47,27 @@ namespace Supermarket_mvp.Views
             get { return TxtPayModeName.Text; }
             set { TxtPayModeName.Text = value; }
         }
-        public string PayModeObservation 
+        public string PayModeObservation
         {
             get { return TxtPayModeObservation.Text; }
             set { TxtPayModeObservation.Text = value; }
         }
-        public string SearchValue 
+        public string SearchValue
         {
             get { return TxtSearch.Text; }
             set { TxtSearch.Text = value; }
         }
-        public bool IsEdit 
+        public bool IsEdit
         {
             get { return isEdit; }
             set { isEdit = value; }
         }
-        public bool IsSuccessfull 
+        public bool IsSuccessfull
         {
             get { return isSuccessfull; }
             set { isSuccessfull = value; }
         }
-        public string Message 
+        public string Message
         {
             get { return message; }
             set { message = value; }
@@ -85,6 +85,26 @@ namespace Supermarket_mvp.Views
             DgPayMode.DataSource = payModeList;
         }
 
-     
+        //Patron Singleton para controlar una sola instancia del form
+        private static PayModeView instance;
+
+        public static PayModeView GetInstance()
+        {
+            if (instance == null || instance.IsDisposed)
+            {
+                instance = new PayModeView();
+            }
+            else
+            {
+                if (instance.WindowState == FormWindowState.Minimized)
+                {
+                    instance.WindowState = FormWindowState.Normal;
+                }           
+                instance.BringToFront();
+            }
+            return instance;
+        }
+
+
     }
 }
